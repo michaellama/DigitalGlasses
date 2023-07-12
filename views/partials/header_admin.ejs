@@ -15,8 +15,10 @@
         </ul>
     </nav>
     <div class="header__button">
+        <% if (locals.isAuthenticated) { %>
         <a href="/logout">
             <span>Logout</span>
         </a>
+        <% } %>
     </div>
 </header>

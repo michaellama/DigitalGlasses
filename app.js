@@ -27,13 +27,16 @@ app.use(cookieParser());
 app.use(methodOverride('_method'));
 
 app.use(session({
-    secret: 'keyboard cat',
+    secret: process.env.SESSION_SECRET,
     resave: false,
     saveUninitialized: true,
     store: MongoStore.create({
-        mongoUrl: process.env.MONGODB_URI_SESSIONS
+        mongoUrl: process.env.MONGODB_URI_SESSIONS,
     }),
-}))
+    cookie: {
+        maxAge: 1000 * 60 * 60 * 24 // session will last for 1 day
+    }
+}));
 
 // Use the Passport middleware
 app.use(passport.initialize());
@@ -49,8 +52,8 @@ app.set('view engine', 'ejs');
 
 app.locals.isActiveRoute = isActiveRoute;
 
-app.use('/', require('./server/routes/main'));
 app.use('/', require('./server/routes/login'));
+app.use('/', require('./server/routes/main'));
 
 app.listen(PORT, () => {
     console.log(`App listening on port ${PORT}`);

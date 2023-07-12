@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
-
 const Schema = mongoose.Schema;
+
 const PostSchema = new Schema({
     title: {
         type: String,
@@ -17,6 +17,10 @@ const PostSchema = new Schema({
     updatedAt: {
         type: Date,
         default: Date.now
+    },
+    userId: {
+        type: Schema.Types.ObjectId,
+        ref: 'User'
     }
 });
 

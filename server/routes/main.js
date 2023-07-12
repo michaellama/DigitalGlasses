@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const Post = require('../models/Post');
+const User = require('../models/User');
 
 /** 
  * GET /
@@ -88,6 +89,34 @@ router.post('/search', async (req, res) => {
 });
 
 /** 
+ * GET /:username
+ * User's blog page
+ */
+router.get('/:username', async (req, res) => {
+    try {
+        const username = req.params.username;
+
+        // Find the user
+        const user = await User.findOne({ username: username });
+        if (!user) {
+            return res.status(404).send('User not found');
+        }
+
+        // Find the posts by this user
+        const posts = await Post.find({ userId: user._id }).sort({ createdAt: -1 });
+
+        // Render the blog page
+        res.render('user', {
+            username: username,
+            posts: posts
+        });
+    } catch (error) {
+        console.error(error);
+        res.status(500).send('Server error');
+    }
+});
+
+/** 
  * GET /
  * ABOUT
 */
@@ -108,7 +137,5 @@ router.get('/contact', (req, res) => {
         currentRoute: '/contact'
     });
 });
-
-
 
 module.exports = router;

@@ -1,0 +1,49 @@
+.
+├── README.md
+├── app.js
+├── package-lock.json
+├── package.json
+├── passport-config.js
+├── public
+│   ├── css
+│   │   └── style.css
+│   ├── img
+│   │   └── me.jpg
+│   └── js
+│       └── script.js
+├── server
+│   ├── config
+│   │   └── db.js
+│   ├── helpers
+│   │   └── routeHelpers.js
+│   ├── middleware
+│   │   └── authMiddleware.js
+│   ├── models
+│   │   ├── Post.js
+│   │   └── User.js
+│   └── routes
+│       ├── login.js
+│       └── main.js
+├── structure.txt
+└── views
+    ├── about.ejs
+    ├── admin
+    │   ├── add-post.ejs
+    │   ├── dashboard.ejs
+    │   ├── edit-post.ejs
+    │   ├── index.ejs
+    │   └── register.ejs
+    ├── contact.ejs
+    ├── index.ejs
+    ├── layouts
+    │   ├── admin.ejs
+    │   └── main.ejs
+    ├── partials
+    │   ├── footer.ejs
+    │   ├── header.ejs
+    │   ├── header_admin.ejs
+    │   └── search.ejs
+    ├── post.ejs
+    └── search.ejs
+
+15 directories, 32 files
