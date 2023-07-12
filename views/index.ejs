@@ -21,3 +21,16 @@
     <a href="/?page=<%= nextPage %>" class="pagination">&lt; View Older Posts</a>
     <% } %>
 </section>
+
+<section class="users">
+    <h2 class="users__heading">Users</h2>
+    <ul class="users__ul">
+        <% users.forEach(user => { %>
+        <li>
+            <a href="/<%= user.username %>">
+                <%= user.username %>
+            </a>
+        </li>
+        <% }) %>
+    </ul>
+</section>

@@ -26,10 +26,12 @@ router.get('', async (req, res) => {
         const count = await Post.count();
         const nextPage = parseInt(page) + 1;
         const hasNextPage = nextPage <= Math.ceil(count / perPage);
+        const users = await User.find();
 
         res.render('index', {
             locals,
             data,
+            users,
             current: page,
             nextPage: hasNextPage ? nextPage : null,
             currentRoute: '/'
@@ -93,28 +95,16 @@ router.post('/search', async (req, res) => {
  * User's blog page
  */
 router.get('/:username', async (req, res) => {
-    try {
-        const username = req.params.username;
-
-        // Find the user
-        const user = await User.findOne({ username: username });
-        if (!user) {
-            return res.status(404).send('User not found');
-        }
-
-        // Find the posts by this user
-        const posts = await Post.find({ userId: user._id }).sort({ createdAt: -1 });
-
-        // Render the blog page
-        res.render('user', {
-            username: username,
-            posts: posts
-        });
-    } catch (error) {
-        console.error(error);
-        res.status(500).send('Server error');
+    const user = await User.findOne({ username: req.params.username });
+    if (user) {
+        const posts = await Post.find({ userId: user._id });
+        res.render('profile', { user, posts, currentRoute: '/' });
+    } else {
+        // Handle the case where the user was not found
+        res.status(404).send('User not found');
     }
 });
+
 
 /** 
  * GET /

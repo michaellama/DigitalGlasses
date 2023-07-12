@@ -1,5 +1,5 @@
 <div class="author">
-    <h1 class="author__heading">Hi, I'm <%= username %> </h1>
+    <h1 class="author__heading">Hi, I'm <%= user.username %> </h1>
     <p class="author__body">My space</p>
     <img src="/img/me.jpg" alt="" class="hero-image" alt="person in glasses Superlama" width="500">
 </div>
@@ -7,7 +7,7 @@
 <section class="articles">
     <h2 class="articles__heading">Latest Posts</h2>
     <ul class="articles__ul">
-        <% data.forEach(post => { %>
+        <% posts.forEach(post => { %>
         <li>
             <a href="/post/<%= post._id %>">
                 <span><%= post.title %></span>
@@ -16,8 +16,4 @@
         </li>
         <% }) %>
     </ul>
-
-    <% if (nextPage !== null) { %>
-    <a href="/?page=<%= nextPage %>" class="pagination">&lt; View Older Posts</a>
-    <% } %>
 </section>
