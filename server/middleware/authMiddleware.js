@@ -8,7 +8,6 @@ module.exports.checkAuthenticated = function (req, res, next) {
 }
 
 module.exports.checkNotAuthenticated = function (req, res, next) {
-    console.log("Authentication Status: ", req.isAuthenticated());
     if (req.isAuthenticated()) {
         return res.redirect('/dashboard');
     }

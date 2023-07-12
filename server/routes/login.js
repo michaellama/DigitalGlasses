@@ -13,16 +13,15 @@ const adminLayout = '../views/layouts/admin';
  * Login Page
 */
 router.get('/login', checkNotAuthenticated, async (req, res) => {
-    console.log('GET /login');
     const locals = {
         title: "Admin",
         description: "OnePager Dashboard"
     }
-    res.render('admin/index', {
+    res.render('admin/login', {
         locals: {
             title: "Dashboard",
             description: "OnePager Dashboard",
-            isAuthenticated: req.isAuthenticated() // make sure you're passing this
+            isAuthenticated: req.isAuthenticated()
         },
         layout: adminLayout
     });
