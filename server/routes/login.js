@@ -163,7 +163,6 @@ router.get('/register', checkNotAuthenticated, (req, res) => {
     });
 });
 
-
 /**
  * POST /register
  * Register New User
@@ -177,6 +176,7 @@ router.post('/register', async (req, res) => {
         const user = new User({
             username: req.body.username,
             password: hashedPassword,
+            email: req.body.email,
         });
         console.log("User instance created");
         const existingUser = await User.findOne({ username: req.body.username });
